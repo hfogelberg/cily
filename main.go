@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"image/jpeg"
 	"log"
 	"os"
@@ -14,6 +15,7 @@ import (
 var i = flag.String("i", "", "File in")
 var o = flag.String("o", "", "File out. Default is timestamp if left blank")
 var w = flag.String("w", "", "Width of output file in px. Default is 700")
+var r = flag.Bool("r", false, "Remove original file")
 
 func main() {
 	flag.Parse()
@@ -41,28 +43,6 @@ func main() {
 		size = uint(w64)
 	}
 
-	// 1. Save file to temp directory
-	// file, _, err := r.FormFile("file")
-	// if err != nil {
-	// 	log.Println(err)
-	// 	return "", err
-	// }
-	// defer file.Close()
-
-	// out, err := os.Create(fileName)
-	// if err != nil {
-	// 	log.Printf("Error creating file %s\n", err.Error())
-	// 	return
-	// }
-	// defer out.Close()
-
-	// _, err = io.Copy(out, file)
-	// if err != nil {
-	// 	log.Printf("Error copying filen %s\n", err.Error())
-	// 	return
-	// }
-
-	log.Printf("File to reduce %s\n", *i)
 	fResize, err := os.Open(*i)
 	if err != nil {
 		log.Printf("Error reducing image size %s\n", err.Error())
@@ -85,30 +65,15 @@ func main() {
 	defer out.Close()
 	jpeg.Encode(out, m, nil)
 
-	// name, err := resize(img, size)
-	// if err != nil {
-	// 	log.Printf("Error resizing image %s\n", err.Error())
-	// 	return
-	// }
+	// Remove uncompressed filed
+	if *r == true {
+		err = os.Remove(*i)
+		if err != nil {
+			log.Printf("Error removing uncompressed image %s\n", err.Error())
+			return
+		}
+	}
 
-	// // 3. Remove uncompressed filed
-	// err = os.Remove(path)
-	// if err != nil {
-	// 	log.Printf("Error removing uncompressed image %")
-	// }
-
-	log.Printf("Image compressed %s\n", fileName)
+	fmt.Printf("Image compressed %s\n", fileName)
 	return
 }
-
-// func resize(img image.Image, width uint, string fileOut) (string, error) {
-// 	m := resize.Resize(1000, 0, img, resize.NearestNeighbor)
-// 	out, err := os.Create(fileOut)
-// 	if err != nil {
-// 		return "", err
-// 	}
-// 	defer out.Close()
-// 	jpeg.Encode(out, m, nil)
-
-// 	return fileOut, nil
-// }

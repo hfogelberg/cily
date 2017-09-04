@@ -1,7 +1,7 @@
 .DS_Store
 
 # Binary file
-fileupload
+cily
 main
 
 # Ignore all
@@ -38,3 +38,7 @@ relative/path/to/dir/anotherfile
 
 # Uploads
 example/public/tmp
+
+.DS_Store
+
+*.jpg
