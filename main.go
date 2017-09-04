@@ -30,7 +30,7 @@ func main() {
 	}
 
 	if *o == "" {
-		fileName = time.Now().String() + ".jpg"
+		fileName = fmt.Sprint(time.Now().Unix()) + ".jpg"
 	} else {
 		fileName = *o
 	}
@@ -74,6 +74,6 @@ func main() {
 		}
 	}
 
-	fmt.Printf("Image compressed %s\n", fileName)
+	fmt.Printf("Image compressed with filename %s\n", fileName)
 	return
 }
