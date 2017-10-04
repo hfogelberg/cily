@@ -1,12 +1,15 @@
-# Cily
+# Gofio
 
 Command line version of [Fily]("https://github.com/hfogelberg/fily") to quickly reduce a jpg image to a web friendly size.
 
 ## Installation
-DIY. Build in Go and and copy the binary to wherever you want it depending on the OS. On a Mac you could run `$ sudo mv cily ~/../../usr/local/bin/cily`.
+````
+$ go build
+$ go install gofio
+````
 
 ## Usage
-Basic usage is just to type `$ cily -i my-file.jpg`. The file will be reduced to a default width of 700 px and the output file will be named with a timestamp.
+Basic usage is just to type `$ gofio -i my-file.jpg`. The file will be reduced to a default width of 700 px and the output file will be named with a timestamp.
 
 ## Flags
 -i: Name of input file. Obligatory<br>
@@ -15,7 +18,7 @@ Basic usage is just to type `$ cily -i my-file.jpg`. The file will be reduced to
 -r: Remove original file. Default is false.<br>
 -h: Show help<br>
 
-So, the command `$ cily -i big.jpg -o small.jpg -w 1200 -r` will create a 1200 px wide copy of the file big.jpg, name it small.jpg and remove the file big.jpg. 
+So, the command `$ gofio -i big.jpg -o small.jpg -w 1200 -r` will create a 1200 px wide copy of the file big.jpg, name it small.jpg and remove the file big.jpg. 
 
 -Get it?<br>
 -Got it!<br>
@@ -23,3 +26,6 @@ So, the command `$ cily -i big.jpg -o small.jpg -w 1200 -r` will create a 1200 p
 
 ## Improvements?
 Please contribute!
+
+## Todo
+- Also handle png files.
